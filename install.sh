@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 
-sh -c "$(curl -fsLS chezmoi.io/get)" -- init --apply $blaugold
+chsh -s $(which zsh)
+sh -c "$(curl -fsLS chezmoi.io/get)" -- init --apply blaugold
