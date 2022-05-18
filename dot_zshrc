@@ -1,0 +1,44 @@
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/gabriel/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+plugins=(git docker gradle flutter heroku)
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# Setup env for Node Version Manager
+NVM_DIR="$HOME/.nvm"
+if [[ -d "$NVM_DIR" ]]; then
+    export NVM_DIR="$NVM_DIR"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+fi
+
+# Setup env for Dart Pub
+export PATH="$HOME/.pub-cache/bin:$PATH"
+
+# Setup env for Flutter Version Manager
+export PATH="$HOME/fvm/default/bin:$PATH"
+
+# Setup env for Chromium depot tools
+export PATH="$HOME/.depot_tools:$PATH"
+
+# Setup env Android SDK
+if [[ -z "$ANDROID_HOME" ]]; then
+    case "$(uname)" in
+    Darwin)
+        export ANDROID_HOME="$HOME/Library/Android/sdk"
+        ;;
+    Linux)
+        export ANDROID_HOME=$HOME/Android/Sdk
+        ;;
+    esac
+
+    if [[ ! -d "$ANDROID_HOME" ]]; then
+        unset ANDROID_HOME
+    fi
+fi
+
+if [[ -n "$ANDROID_HOME" ]]; then
+    export PATH="$PATH:$ANDROID_HOME/platform-tools/latest/bin:$ANDROID_HOME/platform-tools"
+fi
