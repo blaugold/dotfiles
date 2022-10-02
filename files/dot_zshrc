@@ -1,15 +1,14 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# Setup oh-my-zsh
+ZSH="$HOME/.oh-my-zsh"
+if [[ -d "$ZSH" ]]; then
+    # Theme
+    ZSH_THEME="robbyrussell"
 
-# Theme
-ZSH_THEME="robbyrussell"
+    # Plugins
+    plugins=(git docker gradle flutter heroku)
 
-# Plugins
-plugins=(git docker gradle flutter heroku)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
+    source $ZSH/oh-my-zsh.sh
+fi
 
 # Setup env for Node Version Manager
 NVM_DIR="$HOME/.nvm"
@@ -20,13 +19,22 @@ if [[ -d "$NVM_DIR" ]]; then
 fi
 
 # Setup env for Dart Pub
-export PATH="$HOME/.pub-cache/bin:$PATH"
+PUB_CACHE="$HOME/.pub-cache"
+if [[ -d "$PUB_CACHE" ]]; then
+    export PATH="$PUB_CACHE/bin:$PATH"
+fi
 
-# Setup env for Flutter Version Manager
-export PATH="$HOME/fvm/default/bin:$PATH"
+# Setup env to use current default version of Flutter configured through FVM.
+FMV_DEFAULT="$HOME/fvm/default"
+if [[ -d "$FMV_DEFAULT" ]]; then
+    export PATH="$FMV_DEFAULT/bin:$PATH"
+fi
 
 # Setup env for Chromium depot tools
-export PATH="$HOME/.depot_tools:$PATH"
+DEPOT_TOOLS="$HOME/depot_tools"
+if [[ -d "$DEPOT_TOOLS" ]]; then
+    export PATH="$DEPOT_TOOLS:$PATH"
+fi
 
 # Setup env Android SDK
 if [[ -z "$ANDROID_HOME" ]]; then
@@ -49,11 +57,13 @@ if [[ -n "$ANDROID_HOME" ]]; then
 fi
 
 # Setup env for homebrew
-if [[ -d "/opt/homebrew" ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+HOMEBREW_HOME="/opt/homebrew"
+if [[ -d "$HOMEBREW_HOME" ]]; then
+    eval "$($HOMEBREW_HOME/bin/brew shellenv)"
 fi
 
 # Setup env for Emscripten SDK
-if [[ -d "$HOME/emsdk" ]]; then
-    source "$HOME/emsdk/emsdk_env.sh"
+EMSDK="$HOME/emsdk"
+if [[ -d "$EMSDK" ]]; then
+    source "$EMSDK/emsdk_env.sh"
 fi
