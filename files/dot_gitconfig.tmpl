@@ -1,0 +1,14 @@
+[user]
+	email = gabriel@terwesten.net
+	name = Gabriel Terwesten
+[http]
+{{- if eq .chezmoi.os "darwin" }}
+	cookiefile = /Users/{{ .chezmoi.username }}/.gitcookies
+{{- else if eq .chezmoi.os "linux" }}
+	cookiefile = /home/{{ .chezmoi.username }}/.gitcookies
+{{- end }}
+[alias]
+	co = checkout
+	st = status
+	c = commit
+	a = add
